@@ -1,9 +1,11 @@
+'use strict';
+
 const GitHubStrategy = require('passport-github').Strategy;
 const FacebookStrategy = require("passport-facebook").Strategy;
 const LocalStrategy = require("passport-local").Strategy;
 const bCrypt = require("bcrypt-nodejs");
-import User from '../models/users';
-import configAuth from './auth';
+var User = require('../models/users');
+var configAuth = require('./auth');
 
 module.exports = passport => {
   const isValidPassword = (user, password) => {

@@ -1,44 +1,21 @@
+'use strict';
+
 require('dotenv').load();
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
-import express from 'express';
-import routes from './app/routes/routes';
-import mongoose from 'mongoose';
-import passport from 'passport';
-import session from 'express-session';
-import bodyParser from 'body-parser';
-import compression from 'compression';
+var express = require('express');
+var routes = require('./app/routes/routes');
+var mongoose = require('mongoose');
+var passport = require('passport');
+var session = require('express-session');
+var bodyParser = require('body-parser');
+var compression = require('compression');
 
 const app = express();
 app.use(compression({ threshold: 0 }));
 mongoose.connect(process.env.MONGO_URI);
 
 if (process.env.NODE_ENV === 'development') {
-  // Development Env specific stuff
-  // - Start dev server
-  // - Use MemoryStore for the session
-  const webpackDevMiddleware = require('webpack-dev-middleware');
-  const webpackHotMiddleware = require('webpack-hot-middleware');
-  const webpack              = require('webpack');
-  const config               = require('../webpack.config');
-  const compiler             = webpack(config);
-
-  app.use(webpackDevMiddleware(compiler, {
-    hot: true,
-    filename: 'bundle.js',
-    publicPath: '/client/',
-    stats: {
-      colors: true,
-    },
-    historyApiFallback: true,
-  }));
-
-  app.use(webpackHotMiddleware(compiler, {
-    log: console.log,
-    path: '/__webpack_hmr',
-    heartbeat: 10 * 1000,
-  }));
-
   app.use(session({
     secret: 'secretClementine',
     resave: false,

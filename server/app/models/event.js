@@ -1,4 +1,6 @@
-import mongoose from 'mongoose';
+'use strict';
+
+var mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const Event = new Schema({
@@ -11,4 +13,4 @@ const Event = new Schema({
   owner: String,
 });
 
-export default mongoose.model('Event', Event);
+module.exports = mongoose.model('Event', Event);

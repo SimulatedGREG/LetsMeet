@@ -1,9 +1,11 @@
+'use strict';
+
 const path = process.cwd();
-import Event from '../models/event';
-import User from '../models/users';
-import passport from 'passport';
-import _ from 'lodash';
-import sendEmail from '../config/email';
+var Event = require('../models/event');
+var User = require('../models/users');
+var passport = require('passport');
+var _ = require('lodash');
+var sendEmail = require('../config/email');
 
 const isAuthenticated = (req, res, next) => {
   if (req.isAuthenticated()) return next();
@@ -11,7 +13,7 @@ const isAuthenticated = (req, res, next) => {
   return res.status(403).send('Authentiation required.');
 };
 
-export default (app) => {
+module.exports = (app) => {
   /*
   ....###....########..####..######.
   ...##.##...##.....##..##..##....##

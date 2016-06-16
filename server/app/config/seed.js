@@ -1,4 +1,6 @@
-import Event from '../models/event.js';
+'use strict';
+
+var Event = require('../models/event.js');
 
 Event.find({}).remove(() => {
   Event.create([{

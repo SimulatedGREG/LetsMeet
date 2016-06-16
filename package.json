@@ -4,13 +4,11 @@
   "description": "Schedule events with ease!",
   "main": "index.js",
   "scripts": {
-    "clean": "rm -rf build && mkdir build",
-    "build:server": "babel -d ./build ./server -s",
-    "build:client": "webpack -p --config ./webpack.production.config.js",
-    "build": "npm run clean && npm run build:server && npm run build:client",
+    "build": "webpack -p --config ./webpack.production.config.js",
     "start": "node ./build/app.js",
-    "serve": "npm run clean && npm run build:server && npm run start",
-    "postinstall": "npm run build",
+    "client": "webpack-dev-server --inline --hot --colors --port 9080 --content-base client/",
+    "server": "supervisor server/app.js",
+    "serve": "npm-run-all --parallel server app",
     "deploy": "git push heroku development:master"
   },
   "repository": {
@@ -76,6 +74,7 @@
   "homepage": "https://github.com/akiralaine/letsmeet#readme",
   "devDependencies": {
     "babel-eslint": "^6.0.4",
+    "css-loader": "^0.23.1",
     "eslint": "^2.12.0",
     "eslint-config-airbnb": "^9.0.1",
     "eslint-friendly-formatter": "^2.0.5",
@@ -83,7 +82,13 @@
     "eslint-plugin-import": "^1.8.1",
     "eslint-plugin-jsx-a11y": "^1.4.2",
     "eslint-plugin-react": "^5.1.1",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "html-webpack-plugin": "^2.21.0",
+    "npm-run-all": "^2.1.2",
+    "style-loader": "^0.13.1",
+    "supervisor": "^0.11.0",
     "webpack-dev-middleware": "^1.6.1",
+    "webpack-dev-server": "^1.14.1",
     "webpack-hot-middleware": "^2.10.0",
     "write-file-webpack-plugin": "^3.1.8"
   }

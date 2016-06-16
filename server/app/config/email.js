@@ -1,6 +1,8 @@
-import nodemailer from 'nodemailer';
+'use strict';
 
-export default (message, cb) => {
+var nodemailer = require('nodemailer');
+
+module.exports = (message, cb) => {
   const transporter = nodemailer.createTransport({
     service: 'Mailgun',
     auth: {
